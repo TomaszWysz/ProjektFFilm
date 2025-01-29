@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ProjektFFilm.Models.Favorite>
+
+@{
+    ViewData["Title"] = "Obejrzane filmy";
+}
+
+@{
+    var sortedModel = Model.OrderBy(f => f.Movie.Title);
+}
+
+<h1>Obejrzane filmy</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var favorite in sortedModel)
+        {
+            var averageRating = favorite.Rating;
+
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 d-flex flex-column">
+                    <a asp-action="Details" asp-route-id="@favorite.MovieId">
+                        <img src="@favorite.Movie.ImageUrl" class="card-img-top" alt="Movie Poster" style="max-width: 100%; max-height: 350px;" />
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@favorite.Movie.Title</h5>
+                        <div class="mt-auto">
+                            <p class="card-text">
+                                <strong>My Rating:</strong> @averageRating?.ToString("0.00")
+                            </p>
+                            <form asp-action="RemoveFromFavorites" method="post">
+                                <input type="hidden" name="movieId" value="@favorite.MovieId" />
+                                <input type="submit" value="Odobejrzyj" class="btn btn-danger" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

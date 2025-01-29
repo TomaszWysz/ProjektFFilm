@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+
+<h1>Lista użytkowników</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>UserName</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Email</td>
+                <td>@user.UserName</td>
+
+                <td>
+                    <form asp-controller="Users" asp-action="Ban" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-danger">Zbanuj</button>
+                    </form>
+                    <form asp-controller="Users" asp-action="Unban" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-success">Odbanuj</button>
+                    </form>
+                    <form asp-controller="Users" asp-action="SetTimeout" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <input type="number" name="minutes" placeholder="Czas w minutach" required />
+                        <button type="submit" class="btn btn-warning">Ustaw timeout</button>
+                    </form>
+
+                    <div id="lockoutInfo-@user.Id"></div>
+                    <button type="button" class="btn btn-info get-lockout-info" data-user-id="@user.Id">Sprawdź czas blokady</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('.get-lockout-info').click(function () {
+                var userId = $(this).data('user-id');
+                $.ajax({
+                    url: '@Url.Action("GetUserLockoutInfo", "Users")',
+                    type: 'GET',
+                    data: { userId: userId },
+                    success: function (data) {
+                        $('#lockoutInfo-' + userId).html('<div class="alert alert-warning" role="alert">' + data.lockoutInfo + '</div>');
+                    },
+                    error: function () {
+                        alert('Wystąpił problem podczas pobierania informacji o czasie blokady.');
+                    }
+                });
+            });
+        });
+    </script>
+}

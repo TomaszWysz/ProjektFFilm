@@ -1,0 +1,129 @@
+﻿/* site.css */
+
+/* Stylizacja body */
+body {
+    font-family: Verdana, sans-serif; /* Ustawiona czcionka Verdana */
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Stylizacja paska nawigacyjnego */
+.navbar {
+    background-color: #6a0dad; /* fioletowy kolor */
+    overflow: hidden;
+}
+
+    /* Linki w pasku nawigacyjnym */
+    .navbar a {
+        float: none;
+        display: block;
+        color: #fff; /* biały kolor tekstu */
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+
+        /* Stylizacja linków po najechaniu myszką */
+        .navbar a:hover {
+            background-color: #4b0082; /* ciemniejszy fiolet */
+            color: white;
+        }
+
+/* Stylizacja nagłówka */
+h1 {
+    color: #6a0dad; /* fioletowy kolor */
+    text-align: center;
+}
+
+/* Stylizacja tabeli */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Verdana, sans-serif; /* Dodano czcionkę dla tabel */
+}
+
+    /* Stylizacja komórek w tabeli */
+    .table th, .table td {
+        border: 1px solid #4b0082; /* ciemniejszy fiolet */
+        padding: 8px;
+        text-align: left;
+    }
+
+    /* Stylizacja komórek nagłówka w tabeli */
+    .table th {
+        background-color: #6a0dad; /* fioletowy kolor */
+        color: white;
+    }
+
+/* Stylizacja przycisków */
+.btn {
+    background-color: #6a0dad; /* fioletowy kolor */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: Verdana, sans-serif; /* Dodano czcionkę dla przycisków */
+}
+
+    /* Stylizacja przycisków po najechaniu myszką */
+    .btn:hover {
+        background-color: #4b0082; /* ciemniejszy fiolet */
+        color: white;
+    }
+
+/* Stylizacja linków */
+a {
+    color: #6a0dad; /* fioletowy kolor tekstu linków */
+    text-decoration: none; /* Usunięcie domyślnego podkreślenia */
+    transition: color 0.3s; /* Płynne przejście koloru tekstu przy najechaniu myszką */
+    font-family: Verdana, sans-serif; /* Dodano czcionkę dla linków */
+}
+
+    /* Stylizacja linków po najechaniu myszką */
+    a:hover {
+        color: #4b0082; /* ciemniejszy fiolet tekstu linków po najechaniu myszką */
+    }
+
+.character-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.character-item {
+    width: 120px; /* Ustalona szerokość kontenera */
+    text-align: center;
+}
+
+.character-avatar {
+    width: 100px; /* Ustalona szerokość dla awatarów */
+    height: 150px; /* Ustalona wysokość dla awatarów */
+    object-fit: cover; /* Dopasowanie obrazu */
+    border: 1px solid #4b0082; /* ciemniejszy fiolet */
+    margin-bottom: 10px; /* Dodanie odstępu poniżej obrazów */
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporcje 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin-top: 20px;
+}
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+.logout-button {
+    font-weight: bold;
+    font-family: Verdana, sans-serif; /* Dodano czcionkę dla przycisku wylogowania */
+}

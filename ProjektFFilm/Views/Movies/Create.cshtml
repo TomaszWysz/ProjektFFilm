@@ -1,0 +1,100 @@
+﻿@model ProjektFFilm.Models.Movie
+
+@{
+    ViewData["Title"] = "Dodaj";
+}
+
+<link href="~/css/site.css" rel="stylesheet" />
+<h1>Dodaj film</h1>
+
+<h4>Film</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" id="createMovieForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReleaseDate" class="control-label"></label>
+                <input asp-for="ReleaseDate" class="form-control" />
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Genre" class="control-label"></label>
+                <input asp-for="Genre" class="form-control" />
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rating" class="control-label"></label>
+                <input asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YouTubeVideoId" class="control-label"></label>
+                <input asp-for="YouTubeVideoId" class="form-control" />
+                <span asp-validation-for="YouTubeVideoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <!-- Pole dla obsady -->
+            <div class="form-group" id="charactersContainer">
+                <label>Obsada</label>
+                <div class="character">
+                    <input type="text" name="Characters[0].Name" class="form-control" placeholder="Name" />
+                    <input type="text" name="Characters[0].Description" class="form-control" placeholder="Description" />
+                    <input type="url" name="Characters[0].AvatarUrl" class="form-control" placeholder="AvatarUrl" />
+                    <img id="previewImage0" src="#" alt="Character Image" style="display:none; max-width: 200px; max-height: 200px;" />
+                </div>
+            </div>
+            <button type="button" id="addCharacterBtn" class="btn btn-secondary">Dodaj kolejne</button>
+
+            <br /><br />
+
+            <div class="form-group">
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Wróć do listy</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            var index = 1;
+            $("#addCharacterBtn").click(function () {
+                var characterHtml = '<div class="character">'
+                    + '<input type="text" name="Characters[' + index + '].Name" class="form-control" placeholder="Name" />'
+                    + '<input type="text" name="Characters[' + index + '].Description" class="form-control" placeholder="Description" />'
+                    + '<input type="url" name="Characters[' + index + '].AvatarUrl" class="form-control" placeholder="AvatarUrl" />'
+                    + '<img id="previewImage' + index + '" src="#" alt="Character Image" style="display:none; max-width: 200px; max-height: 200px;" />'
+                    + '</div>';
+                $("#charactersContainer").append(characterHtml);
+                index++;
+
+                // Funkcja do podglądu obrazka przed dodaniem czasem działa
+                $('input[type="url"]').change(function () {
+                    var AvatarUrl = $(this).val();
+                    var image = $(this).parent().find('img');
+                    image.attr('src', AvatarUrl);
+                    image.show();
+                });
+            });
+        });
+    </script>
+}

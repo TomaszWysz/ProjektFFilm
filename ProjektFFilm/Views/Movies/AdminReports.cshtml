@@ -1,0 +1,40 @@
+﻿@model IEnumerable<FilmList.Models.CommentReport>
+
+@{
+    ViewData["Title"] = "Zgłoszone komentarze";
+}
+
+<h1>Zgłoszone komentarze</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Komentarz</th>
+            <th>Zgłoszony przez</th>
+            <th>Zgłoszony w dniu</th>
+            <th>Powód</th>
+            <th>Działania</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var report in Model)
+        {
+            <tr>
+                <td>@report.Comment.Content</td>
+                <td>@report.ReportedBy</td>
+                <td>@report.ReportedOn</td>
+                <td>@report.ReportReason</td>
+                <td>
+                    <form asp-action="DeleteReport" method="post">
+                        <input type="hidden" name="reportId" value="@report.Id" />
+                        <button type="submit" class="btn btn-danger">Zignoruj zgłoszenie</button>
+                    </form>
+                    <form asp-action="DeleteCommentA" method="post">
+                        <input type="hidden" name="commentId" value="@report.Comment.Id" />
+                        <button type="submit" class="btn btn-danger">Usuń komentarz</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

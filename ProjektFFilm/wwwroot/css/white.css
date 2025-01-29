@@ -1,0 +1,132 @@
+﻿/* site.css */
+
+/* Stylizacja body */
+body {
+    font-family: Verdana, sans-serif; /* Dodano czcionkę Verdana */
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Stylizacja paska nawigacyjnego */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+}
+
+    /* Linki w pasku nawigowym */
+    .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-family: Verdana, sans-serif; /* Dodano czcionkę dla linków w nawigacji */
+    }
+
+        /* Stylizacja linków po najechaniu myszką */
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+/* Stylizacja nagłówka */
+h1 {
+    color: #333;
+    text-align: center;
+    font-family: Verdana, sans-serif; /* Dodano czcionkę dla nagłówka */
+}
+
+/* Stylizacja tabeli */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Verdana, sans-serif; /* Dodano czcionkę dla tabeli */
+}
+
+    /* Stylizacja komórek w tabeli */
+    .table th, .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    /* Stylizacja komórek nagłówka w tabeli */
+    .table th {
+        background-color: #333;
+        color: white;
+    }
+
+/* Stylizacja przycisków */
+.btn {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: Verdana, sans-serif; /* Dodano czcionkę dla przycisków */
+}
+
+    /* Stylizacja przycisków po najechaniu myszką */
+    .btn:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+/* Stylizacja linków */
+a {
+    color: #007bff; /* Kolor tekstu linków */
+    text-decoration: none; /* Usunięcie domyślnego podkreślenia */
+    transition: color 0.3s; /* Płynne przejście koloru tekstu przy najechaniu myszką */
+    font-family: Verdana, sans-serif; /* Dodano czcionkę dla linków */
+}
+
+    /* Stylizacja linków po najechaniu myszką */
+    a:hover {
+        color: #0056b3; /* Zmiana koloru tekstu linków po najechaniu myszką */
+    }
+
+.character-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.character-item {
+    width: 120px; /* Define a fixed width for the container */
+    text-align: center;
+}
+
+.character-avatar {
+    width: 100px; /* Fixed width for all character avatars */
+    height: 150px; /* Fixed height for all character avatars */
+    object-fit: cover; /* Ensures the image covers the specified dimensions */
+    border: 1px solid #ddd; /* Optional: adds a border around images */
+    margin-bottom: 10px; /* Adds spacing below the images */
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin-top: 20px;
+}
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+/* Stylizacja przycisku wylogowania */
+.logout-button {
+    font-weight: bold;
+    font-family: Verdana, sans-serif; /* Dodano czcionkę dla przycisku wylogowania */
+}

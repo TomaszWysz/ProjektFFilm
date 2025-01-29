@@ -1,0 +1,109 @@
+﻿@model ProjektFFilm.Models.Movie
+
+@{
+    ViewData["Title"] = "Edytuj";
+}
+<link href="~/css/site.css" rel="stylesheet" />
+<h1>Edytuj</h1>
+
+<h4>Film</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReleaseDate" class="control-label"></label>
+                <input asp-for="ReleaseDate" class="form-control" />
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Genre" class="control-label"></label>
+                <input asp-for="Genre" class="form-control" />
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rating" class="control-label"></label>
+                <input asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YouTubeVideoId" class="control-label"></label>
+                <input asp-for="YouTubeVideoId" class="form-control" />
+                <span asp-validation-for="YouTubeVideoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <!-- Obsada -->
+            <h4>Obsada</h4>
+            <div id="characters-section">
+                @for (int i = 0; i < Model.Characters.Count; i++)
+                {
+                    <div class="form-group">
+                        <input type="hidden" asp-for="Characters[i].Id" />
+                        <label asp-for="Characters[i].Name" class="control-label"></label>
+                        <input asp-for="Characters[i].Name" class="form-control" />
+                        <span asp-validation-for="Characters[i].Name" class="text-danger"></span>
+
+                        <label asp-for="Characters[i].Description" class="control-label"></label>
+                        <input asp-for="Characters[i].Description" class="form-control" />
+                        <span asp-validation-for="Characters[i].Description" class="text-danger"></span>
+
+                        <label asp-for="Characters[i].AvatarUrl" class="control-label"></label>
+                        <input asp-for="Characters[i].AvatarUrl" class="form-control" />
+                        <span asp-validation-for="Characters[i].AvatarUrl" class="text-danger"></span>
+                    </div>
+                }
+            </div>
+            <button type="button" class="btn btn-secondary" id="add-character">Dodaj osobę</button>
+
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+            </div>
+        </form>
+        <br />
+        <a asp-action="Index">Wróć do listy</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var characterIndex = @Model.Characters.Count;
+            $("#add-character").click(function () {
+                var newCharacter = `
+                            <div class="form-group">
+                                <input type="hidden" name="Characters[${characterIndex}].Id" value="0" />
+                                <label for="Characters_${characterIndex}__Name" class="control-label">Name</label>
+                                <input class="form-control" type="text" name="Characters[${characterIndex}].Name" id="Characters_${characterIndex}__Name" />
+                                <span class="text-danger" data-valmsg-for="Characters[${characterIndex}].Name" data-valmsg-replace="true"></span>
+
+                                <label for="Characters_${characterIndex}__Description" class="control-label">Description</label>
+                                <input class="form-control" type="text" name="Characters[${characterIndex}].Description" id="Characters_${characterIndex}__Description" />
+                                <span class="text-danger" data-valmsg-for="Characters[${characterIndex}].Description" data-valmsg-replace="true"></span>
+
+                                <label for="Characters_${characterIndex}__AvatarUrl" class="control-label">AvatarUrl</label>
+                                <input class="form-control" type="text" name="Characters[${characterIndex}].AvatarUrl" id="Characters_${characterIndex}__AvatarUrl" />
+                                <span class="text-danger" data-valmsg-for="Characters[${characterIndex}].AvatarUrl" data-valmsg-replace="true"></span>
+                            </div>`;
+                $("#characters-section").append(newCharacter);
+                characterIndex++;
+            });
+        });
+    </script>
+}
